@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>النهاية السعيدة</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>النهاية السعيدة <span class="emoji">🎉</span></h1>
+        <p> ضحكتي؟ لو آه دوسي هنا عشان الموقع يعمل حفلة صغيرة</p>
+        <button id="celebrateBtn" class="btn animate-pulse">ايوه ضحكت</button>
+        <p id="message" class="hidden">ضحكتك بالنسبالي أحلى إنجاز
+            سوري لو اخرت عليكي بقى 
+        </p>
+    </div>
+    <canvas id="confetti"></canvas>
+    <script>
+        const celebrateBtn = document.getElementById('celebrateBtn');
+        const message = document.getElementById('message');
+        const confetti = document.getElementById('confetti');
+        const ctx = confetti.getContext('2d');
+
+        celebrateBtn.addEventListener('click', () => {
+            message.classList.remove('hidden');
+            startConfetti();
+        });
+
+        function startConfetti() {
+            confetti.width = window.innerWidth;
+            confetti.height = window.innerHeight;
+            const pieces = [];
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+
+            for (let i = 0; i < 100; i++) {
+                pieces.push({
+                    x: Math.random() * confetti.width,
+                    y: Math.random() * confetti.height,
+                    r: Math.random() * 5 + 2,
+                    d: Math.random() * 16 - 8,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    tilt: Math.floor(Math.random() * 33) - 11,
+                    tiltAngleIncrement: Math.random() * 0.07 + 0.05,
+                    tiltAngle: 0
+                });
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, confetti.width, confetti.height);
+
+                pieces.forEach((p) => {
+                    ctx.beginPath();
+                    ctx.lineWidth = p.r / 2;
+                    ctx.strokeStyle = p.color;
+                    ctx.moveTo(p.x + p.tilt + p.r, p.y);
+                    ctx.lineTo(p.x + p.tilt, p.y + p.tilt + p.r);
+                    ctx.stroke();
+
+                    p.tiltAngle += p.tiltAngleIncrement;
+                    p.y += (Math.cos(p.d) + 3 + p.r / 2) / 2;
+                    p.x += Math.sin(p.d);
+                    p.tilt = Math.sin(p.tiltAngle) * 15;
+
+                    if (p.y > confetti.height) {
+                        p.x = Math.random() * confetti.width;
+                        p.y = -10;
+                        p.tilt = Math.floor(Math.random() * 33) - 11;
+                        p.tiltAngle = 0;
+                    }
+                });
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نكت لضحكة يمنى</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>نكت جايبها من النت والله ما قريتها <span class="emoji">😂</span></h1>
+        <p id="joke">فيه واحد طلع القمر، قعد يشوف الأرض من فوق وقال: يا خرابي دي كلها زحمة ليه؟</p>
+        <button id="newJokeBtn" class="btn animate-pulse">اضحكي تاني!</button>
+        <br>
+        <a href="game.html" class="btn">العبي لعبة الضحك</a>
+    </div>
+    <script>
+        const jokes = [
+            "فيه واحد طلع القمر، قعد يشوف الأرض من فوق وقال: يا خرابي دي كلها زحمة ليه؟",
+            "واحد مشغول قوي، راح يطلب قهوة، قالوله: شاي مشغول؟ قالهم: مش فاضي!",
+            "مرة واحد راح للدكتور قاله انا عندي برد، الدكتور قاله خد الدوا ده وروح نام، قاله طب والبرد؟ قاله هيروح لوحده!"
+        ];
+        const jokeElement = document.getElementById('joke');
+        const newJokeBtn = document.getElementById('newJokeBtn');
+        newJokeBtn.addEventListener('click', () => {
+            const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
+            jokeElement.textContent = randomJoke;
+        });
+    </script>
+</body>
+</html>
+

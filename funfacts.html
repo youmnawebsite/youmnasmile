@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حقائق ظريفة عن يمنى</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>ضحكتك حلوه ياسطا<span class="emoji">🌟</span></h1>
+        <p id="funFact">اسمك حلوه والله بس مش عارف اقلش عليه</p>
+        <button id="newFactBtn" class="btn animate-pulse"> كلمه تانيه</button>
+        <br>
+        <a href="final.html" class="btn"> لما تخلصي دوسي هنا</a>
+    </div>
+    <script>
+        const facts = [
+            "عليا الطلاق طول ما الخساره مش انتي يبقى مخسرتش حاجه",
+            "كلهم ضحكتهم طبيعيه بس انتي ضحكتك احلاهم",
+            "الضحكه لو كانت بفلوس كنتي زمانك اغنى حد في مصر باصي الضحكه بقى الهي تنستري"
+        ];
+        const factElement = document.getElementById('funFact');
+        const newFactBtn = document.getElementById('newFactBtn');
+        newFactBtn.addEventListener('click', () => {
+            const randomFact = facts[Math.floor(Math.random() * facts.length)];
+            factElement.textContent = randomFact;
+        });
+    </script>
+</body>
+</html>
+

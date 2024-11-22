@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لعبة الضحك</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        #gameArea {
+            width: 300px;
+            height: 300px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            margin: 20px auto;
+        }
+        .emoji {
+            position: absolute;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>لعبة الضحك <span class="emoji">🎮</span></h1>
+        <p>دوسي على الإيموجي قبل ما يختفي</p>
+        <div id="gameArea"></div>
+        <p id="score">النتيجة: 0</p>
+        <a href="funfacts.html" class="btn">شوفي حاجات حلوه عنك</a>
+    </div>
+    <script>
+        const gameArea = document.getElementById('gameArea');
+        const scoreElement = document.getElementById('score');
+        let score = 0;
+
+        function createEmoji() {
+            const emoji = document.createElement('div');
+            emoji.className = 'emoji';
+            emoji.textContent = ['😂', '😍', '🌸'][Math.floor(Math.random() * 3)];
+            emoji.style.left = Math.random() * (gameArea.offsetWidth - 40) + 'px';
+            emoji.style.top = Math.random() * (gameArea.offsetHeight - 40) + 'px';
+            
+            emoji.addEventListener('click', () => {
+                score++;
+                scoreElement.textContent = `النتيجة: ${score}`;
+                gameArea.removeChild(emoji);
+                if (score % 5 === 0) {
+                    alert('عاش ياسطا ضحكتك بالدنيا كلها');
+                }
+            });
+
+            gameArea.appendChild(emoji);
+            setTimeout(() => {
+                if (gameArea.contains(emoji)) {
+                    gameArea.removeChild(emoji);
+                }
+            }, 2000);
+        }
+
+        setInterval(createEmoji, 1000);
+    </script>
+</body>
+</html>
+
